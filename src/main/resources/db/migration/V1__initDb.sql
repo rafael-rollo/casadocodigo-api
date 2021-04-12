@@ -5,6 +5,7 @@ create table author (
 	bio varchar(255),
 	first_name varchar(255),
 	last_name varchar(255),
+	profile_picture_path varchar(255),
 	primary key (id)
 );
 
@@ -32,27 +33,30 @@ create table book_prices (
 	value decimal(19,2)
 );
 
-alter table author_technologiesshe_writes_about 
-	add constraint technologies_of_an_author 
-	foreign key (author_id) 
+alter table author_technologiesshe_writes_about
+	add constraint technologies_of_an_author
+	foreign key (author_id)
 	references author;
 
-    
-alter table book 
-	add constraint author_of_a_book 
-	foreign key (author_id) 
+
+alter table book
+	add constraint author_of_a_book
+	foreign key (author_id)
 	references author;
 
-    
-alter table book_prices 
-	add constraint book_for_prices 
-	foreign key (book_id) 
+
+alter table book_prices
+	add constraint book_for_prices
+	foreign key (book_id)
 	references book;
-	
+
 -- initial data -----------------------------------------------------
 
-insert into author (first_name, last_name, bio) 
-	values ('Rafael', 'Rollo', 'Um dev que adora o que faz tanto quanto o futebol, a música ou qualquer outra manifestação artística através da qual pessoas apaixonadas expressam sua verdade.');
-	
-insert into author (first_name, last_name, bio) 
-	values ('Alberto', 'Souza', 'Eu amo ficar com minha família, adoro esportes e atividade física no geral, estudar e trabalhar =).');
+insert into author (first_name, last_name, bio, profile_picture_path)
+	values ('Rafael', 'Rollo', 'Um dev que adora o que faz tanto quanto o futebol, a música ou qualquer outra manifestação artística através da qual pessoas apaixonadas expressam sua verdade.', 'https://user-images.githubusercontent.com/13206745/114415754-5c378f00-9b86-11eb-996d-4d42858ad3c1.jpeg');
+
+insert into author (first_name, last_name, bio, profile_picture_path)
+	values ('Alberto', 'Souza', 'Eu amo ficar com minha família, adoro esportes e atividade física no geral, estudar e trabalhar =).', 'https://user-images.githubusercontent.com/13206745/114415776-622d7000-9b86-11eb-9920-92e27e199fd7.jpeg');
+
+insert into author (first_name, last_name, bio, profile_picture_path)
+	values ('Matheus', 'Brandino', 'Eu sou apenas um rapaz latino-americano, sem dinheiro no banco, sem parentes importantes, e vindo do interior. Mas trago de cabeça uma canção do rádio em que um antigo compositor baiano me dizia: Tudo é divino tudo é maravilhoso!', 'https://user-images.githubusercontent.com/13206745/114415801-678aba80-9b86-11eb-9ad0-1986b12a42e6.jpeg');

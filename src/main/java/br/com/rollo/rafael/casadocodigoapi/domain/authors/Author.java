@@ -23,6 +23,9 @@ public class Author {
     @NotBlank
     private String bio;
 
+    @NotBlank
+    private String profilePicturePath;
+
     @ElementCollection
     private List<String> technologiesSHeWritesAbout = new ArrayList<>();
 
@@ -32,10 +35,11 @@ public class Author {
     @Deprecated
     public Author() { }
 
-    public Author(String firstName, String lastName, String bio) {
+    public Author(String firstName, String lastName, String bio, String profilePicturePath) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
+        this.profilePicturePath = profilePicturePath;
     }
 
     public Integer getId() {

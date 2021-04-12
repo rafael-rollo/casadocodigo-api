@@ -1,8 +1,6 @@
 package br.com.rollo.rafael.casadocodigoapi.application.input;
 
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
-import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
-
 import javax.validation.constraints.NotBlank;
 
 public class AuthorInput {
@@ -15,6 +13,9 @@ public class AuthorInput {
 
     @NotBlank
     private String bio;
+
+    @NotBlank
+    private String profilePicturePath;
 
     public String getFirstName() {
         return firstName;
@@ -40,7 +41,15 @@ public class AuthorInput {
         this.bio = bio;
     }
 
+    public String getProfilePicturePath() {
+        return profilePicturePath;
+    }
+
+    public void setProfilePicturePath(String profilePicturePath) {
+        this.profilePicturePath = profilePicturePath;
+    }
+
     public Author toAuthor() {
-        return new Author(this.firstName, this.lastName, this.bio);
+        return new Author(this.firstName, this.lastName, this.bio, this.profilePicturePath);
     }
 }
