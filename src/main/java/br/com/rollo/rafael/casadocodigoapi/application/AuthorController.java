@@ -1,0 +1,48 @@
+package br.com.rollo.rafael.casadocodigoapi.application;
+
+import br.com.rollo.rafael.casadocodigoapi.application.input.AuthorInput;
+import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
+import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/author")
+public class AuthorController {
+
+    private AuthorRepository authors;
+
+    @Autowired
+    public AuthorController(AuthorRepository authors) {
+        this.authors = authors;
+    }
+
+    @Transactional
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Author> create(@Valid @RequestBody AuthorInput input, UriComponentsBuilder uriBuilder) {
+        Author createdAuthor = this.authors.save(input.toAuthor());
+
+        URI authorPath = uriBuilder
+                .path("/api/author/{id}")
+                .buildAndExpand(createdAuthor.getId())
+                .toUri();
+
+        return ResponseEntity.created(authorPath).body(createdAuthor);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Author>> list() {
+        List<Author> foundAuthors = this.authors.findAll();
+        return ResponseEntity.ok().body(foundAuthors);
+    }
+}
