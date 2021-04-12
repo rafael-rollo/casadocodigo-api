@@ -12,6 +12,6 @@ Just build and run the java (8) application. The initial migration will validate
 
 | rollo | alberto | matheus |
 |:-----:|:-------:|:-------:|
-|  |  |  |
+| <img src="https://user-images.githubusercontent.com/13206745/114415754-5c378f00-9b86-11eb-996d-4d42858ad3c1.jpeg" width="120" /> | <img src="https://user-images.githubusercontent.com/13206745/114415776-622d7000-9b86-11eb-9920-92e27e199fd7.jpeg" width="120" /> | <img src="https://user-images.githubusercontent.com/13206745/114415801-678aba80-9b86-11eb-9ad0-1986b12a42e6.jpeg" width="120" /> |
 
 _* just to hold the free github user content storage links 😇_
