@@ -8,15 +8,13 @@ import br.com.rollo.rafael.casadocodigoapi.domain.books.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/book")
@@ -24,11 +22,13 @@ public class BookController {
 
     private AuthorRepository authors;
     private BookCreation bookCreation;
+    private BookRepository books;
 
     @Autowired
-    public BookController(AuthorRepository authors, BookCreation bookCreation) {
+    public BookController(AuthorRepository authors, BookCreation bookCreation, BookRepository books) {
         this.authors = authors;
         this.bookCreation = bookCreation;
+        this.books = books;
     }
 
     @Transactional
@@ -43,5 +43,11 @@ public class BookController {
                 .toUri();
 
         return ResponseEntity.created(bookPath).body(createdBook);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Book>> list() {
+        List<Book> foundBooks = this.books.findAll();
+        return ResponseEntity.ok().body(foundBooks);
     }
 }
