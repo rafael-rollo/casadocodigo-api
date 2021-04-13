@@ -1,6 +1,7 @@
 package br.com.rollo.rafael.casadocodigoapi.application;
 
 import br.com.rollo.rafael.casadocodigoapi.application.input.AuthorInput;
+import br.com.rollo.rafael.casadocodigoapi.application.output.AuthorOutput;
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class AuthorController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Author>> list() {
+    public ResponseEntity<List<AuthorOutput>> list() {
         List<Author> foundAuthors = this.authors.findAll();
-        return ResponseEntity.ok().body(foundAuthors);
+        return ResponseEntity.ok().body(AuthorOutput.listFrom(foundAuthors));
     }
 }
