@@ -1,6 +1,7 @@
 package br.com.rollo.rafael.casadocodigoapi.domain.books;
 
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -34,10 +35,13 @@ public class Book {
     @Valid
     private List<Price> prices = new ArrayList<>();
 
+    @Lob
+    @Column(length=512)
     private String description;
 
     @NotNull
     @ManyToOne
+    @JsonManagedReference
     private Author author;
 
     @NotNull

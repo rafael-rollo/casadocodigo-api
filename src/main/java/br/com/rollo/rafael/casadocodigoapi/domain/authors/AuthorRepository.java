@@ -11,4 +11,5 @@ public interface AuthorRepository extends Repository<Author, Integer> {
 
     List<Author> findAll();
 
+    Author findById(Integer id);
 }

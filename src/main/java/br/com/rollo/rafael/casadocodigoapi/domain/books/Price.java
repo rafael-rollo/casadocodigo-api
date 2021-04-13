@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Embeddable
-class Price {
+public class Price {
 
     @Column(scale = 2)
     @NotNull
@@ -21,6 +21,16 @@ class Price {
     @Enumerated(EnumType.STRING)
     @NotNull
     private BookType bookType;
+
+    @Deprecated
+    public Price() {
+
+    }
+
+    public Price(BookType bookType, BigDecimal value) {
+        this.bookType = bookType;
+        this.value = value;
+    }
 
     public BigDecimal getValue() {
         return value;

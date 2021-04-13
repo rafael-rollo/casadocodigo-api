@@ -1,6 +1,7 @@
 package br.com.rollo.rafael.casadocodigoapi.domain.authors;
 
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -30,6 +31,7 @@ public class Author {
     private List<String> technologiesSHeWritesAbout = new ArrayList<>();
 
     @OneToMany(mappedBy = "author")
+    @JsonBackReference
     private List<Book> publishedBooks = new ArrayList<>();
 
     @Deprecated
@@ -70,6 +72,14 @@ public class Author {
         this.bio = bio;
     }
 
+    public String getProfilePicturePath() {
+        return profilePicturePath;
+    }
+
+    public void setProfilePicturePath(String profilePicturePath) {
+        this.profilePicturePath = profilePicturePath;
+    }
+
     public List<String> getTechnologiesSHeWritesAbout() {
         return technologiesSHeWritesAbout;
     }
@@ -84,5 +94,9 @@ public class Author {
 
     public void setPublishedBooks(List<Book> publishedBooks) {
         this.publishedBooks = publishedBooks;
+    }
+
+    public void addBook(Book book) {
+        this.publishedBooks.add(book);
     }
 }

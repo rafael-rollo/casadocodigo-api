@@ -1,6 +1,6 @@
 package br.com.rollo.rafael.casadocodigoapi.domain.books;
 
-enum BookType {
+public enum BookType {
     EBOOK {
         @Override
         public String toString() {
