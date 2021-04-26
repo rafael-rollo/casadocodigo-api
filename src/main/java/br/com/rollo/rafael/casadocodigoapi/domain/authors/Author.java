@@ -88,6 +88,10 @@ public class Author {
         this.technologiesSHeWritesAbout = technologiesSHeWritesAbout;
     }
 
+    public void addTechnology(String technology) {
+        this.technologiesSHeWritesAbout.add(technology);
+    }
+
     public List<Book> getPublishedBooks() {
         return publishedBooks;
     }

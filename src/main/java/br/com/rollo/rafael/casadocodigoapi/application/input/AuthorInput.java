@@ -2,6 +2,9 @@ package br.com.rollo.rafael.casadocodigoapi.application.input;
 
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuthorInput {
 
@@ -16,6 +19,8 @@ public class AuthorInput {
 
     @NotBlank
     private String profilePicturePath;
+
+    private List<String> technologies = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -49,7 +54,18 @@ public class AuthorInput {
         this.profilePicturePath = profilePicturePath;
     }
 
+    public List<String> getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(List<String> technologies) {
+        this.technologies = technologies;
+    }
+
     public Author toAuthor() {
-        return new Author(this.firstName, this.lastName, this.bio, this.profilePicturePath);
+        Author author = new Author(this.firstName, this.lastName, this.bio, this.profilePicturePath);
+        this.technologies.forEach(author::addTechnology);
+
+        return author;
     }
 }
