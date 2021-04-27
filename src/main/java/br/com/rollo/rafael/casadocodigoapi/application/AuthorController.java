@@ -30,7 +30,7 @@ public class AuthorController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Author> create(@Valid @RequestBody AuthorInput input, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<AuthorOutput> create(@Valid @RequestBody AuthorInput input, UriComponentsBuilder uriBuilder) {
         Author createdAuthor = this.authors.save(input.toAuthor());
 
         URI authorPath = uriBuilder
@@ -38,7 +38,7 @@ public class AuthorController {
                 .buildAndExpand(createdAuthor.getId())
                 .toUri();
 
-        return ResponseEntity.created(authorPath).body(createdAuthor);
+        return ResponseEntity.created(authorPath).body(AuthorOutput.buildFrom(createdAuthor));
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

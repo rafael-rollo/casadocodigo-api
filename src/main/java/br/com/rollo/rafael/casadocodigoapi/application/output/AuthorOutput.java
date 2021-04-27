@@ -54,6 +54,10 @@ public class AuthorOutput {
         return publishedBooks;
     }
 
+    public static AuthorOutput buildFrom(Author author) {
+        return new AuthorOutput(author);
+    }
+
     public static List<AuthorOutput> listFrom(List<Author> authors) {
         return authors.stream()
                 .map(AuthorOutput::new)
