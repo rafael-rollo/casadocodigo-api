@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -45,5 +43,12 @@ public class AuthorController {
     public ResponseEntity<List<AuthorOutput>> list() {
         List<Author> foundAuthors = this.authors.findAll();
         return ResponseEntity.ok().body(AuthorOutput.listFrom(foundAuthors));
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer authorId) {
+        authors.deleteById(authorId);
+        return ResponseEntity.noContent().build();
     }
 }
