@@ -30,7 +30,7 @@ public class Author {
     @ElementCollection
     private List<String> technologiesSHeWritesAbout = new ArrayList<>();
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     @JsonBackReference
     private List<Book> publishedBooks = new ArrayList<>();
 
