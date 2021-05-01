@@ -4,6 +4,8 @@ import br.com.rollo.rafael.casadocodigoapi.application.input.AuthorInput;
 import br.com.rollo.rafael.casadocodigoapi.application.output.AuthorOutput;
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorRepository;
+import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorUpdate;
+import br.com.rollo.rafael.casadocodigoapi.domain.books.BookCreation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +22,12 @@ import java.util.List;
 public class AuthorController {
 
     private AuthorRepository authors;
+    private AuthorUpdate authorUpdate;
 
     @Autowired
-    public AuthorController(AuthorRepository authors) {
+    public AuthorController(AuthorRepository authors, AuthorUpdate authorUpdate) {
         this.authors = authors;
+        this.authorUpdate = authorUpdate;
     }
 
     @Transactional
@@ -50,5 +54,17 @@ public class AuthorController {
     public ResponseEntity<Void> delete(@PathVariable("id") Integer authorId) {
         authors.deleteById(authorId);
         return ResponseEntity.noContent().build();
+    }
+
+    @Transactional
+    @PutMapping(value = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AuthorOutput> update(@PathVariable("id") Integer authorId,
+                                               @Valid @RequestBody AuthorInput input) {
+        Author author = input.toAuthor();
+
+        Author updatedAuthor = authorUpdate.execute(authorId, author);
+        return ResponseEntity.ok().body(AuthorOutput.buildFrom(updatedAuthor));
     }
 }

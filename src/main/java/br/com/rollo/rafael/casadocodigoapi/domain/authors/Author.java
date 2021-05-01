@@ -103,4 +103,12 @@ public class Author {
     public void addBook(Book book) {
         this.publishedBooks.add(book);
     }
+
+    public void updateBy(Author authorUpdate) {
+        this.setFirstName(authorUpdate.getFirstName());
+        this.setLastName(authorUpdate.getLastName());
+        this.setBio(authorUpdate.getBio());
+        this.setProfilePicturePath(authorUpdate.getProfilePicturePath());
+        this.setTechnologiesSHeWritesAbout(authorUpdate.getTechnologiesSHeWritesAbout());
+    }
 }
