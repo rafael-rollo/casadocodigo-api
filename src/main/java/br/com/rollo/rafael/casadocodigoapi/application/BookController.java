@@ -1,6 +1,7 @@
 package br.com.rollo.rafael.casadocodigoapi.application;
 
 import br.com.rollo.rafael.casadocodigoapi.application.input.BookInput;
+import br.com.rollo.rafael.casadocodigoapi.application.output.BookOutput;
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorRepository;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.BookCreation;
@@ -33,7 +34,7 @@ public class BookController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Book> create(@Valid @RequestBody BookInput input, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<BookOutput> create(@Valid @RequestBody BookInput input, UriComponentsBuilder uriBuilder) {
         Book book = input.toBook(this.authors);
         Book createdBook = this.bookCreation.execute(book);
 
@@ -42,12 +43,14 @@ public class BookController {
                 .buildAndExpand(createdBook.getId())
                 .toUri();
 
-        return ResponseEntity.created(bookPath).body(createdBook);
+        return ResponseEntity
+                .created(bookPath)
+                .body(BookOutput.buildFrom(createdBook));
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Book>> list() {
+    public ResponseEntity<List<BookOutput>> list() {
         List<Book> foundBooks = this.books.findAll();
-        return ResponseEntity.ok().body(foundBooks);
+        return ResponseEntity.ok().body(BookOutput.listFrom(foundBooks));
     }
 }
