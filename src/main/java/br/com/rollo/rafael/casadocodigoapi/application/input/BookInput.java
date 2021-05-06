@@ -5,13 +5,17 @@ import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorRepository;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.BookType;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Price;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.time.format.DateTimeFormatter.*;
 
 public class BookInput {
 
@@ -55,7 +59,8 @@ public class BookInput {
     private String isbn;
 
     @NotNull
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate publicationDate;
 
     public String getTitle() {

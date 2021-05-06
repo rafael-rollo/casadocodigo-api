@@ -2,6 +2,7 @@ package br.com.rollo.rafael.casadocodigoapi.application.output;
 
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Price;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,7 @@ public class BookOutput {
     private AuthorOutput author;
     private Integer numberOfPages;
     private String isbn;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate publicationDate;
 
     private BookOutput(Book book) {
