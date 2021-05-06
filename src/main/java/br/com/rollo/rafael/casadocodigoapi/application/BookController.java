@@ -53,4 +53,11 @@ public class BookController {
         List<Book> foundBooks = this.books.findAll();
         return ResponseEntity.ok().body(BookOutput.listFrom(foundBooks));
     }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer bookId) {
+        books.deleteById(bookId);
+        return ResponseEntity.noContent().build();
+    }
 }
