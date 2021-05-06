@@ -55,7 +55,7 @@ public class BookInput {
     private String isbn;
 
     @NotNull
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     private LocalDate publicationDate;
 
     public String getTitle() {
