@@ -6,6 +6,7 @@ import br.com.rollo.rafael.casadocodigoapi.domain.authors.AuthorRepository;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.BookCreation;
 import br.com.rollo.rafael.casadocodigoapi.domain.books.BookRepository;
+import br.com.rollo.rafael.casadocodigoapi.domain.books.BookUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +24,15 @@ public class BookController {
 
     private AuthorRepository authors;
     private BookCreation bookCreation;
+    private BookUpdate bookUpdate;
     private BookRepository books;
 
     @Autowired
-    public BookController(AuthorRepository authors, BookCreation bookCreation, BookRepository books) {
+    public BookController(AuthorRepository authors, BookCreation bookCreation,
+                          BookUpdate bookUpdate, BookRepository books) {
         this.authors = authors;
         this.bookCreation = bookCreation;
+        this.bookUpdate = bookUpdate;
         this.books = books;
     }
 
@@ -59,5 +63,17 @@ public class BookController {
     public ResponseEntity<Void> delete(@PathVariable("id") Integer bookId) {
         books.deleteById(bookId);
         return ResponseEntity.noContent().build();
+    }
+
+    @Transactional
+    @PutMapping(value = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookOutput> update(@PathVariable("id") Integer bookId,
+                                             @Valid @RequestBody BookInput input) {
+        Book book = input.toBook(this.authors);
+
+        Book updatedBook = bookUpdate.execute(bookId, book);
+        return ResponseEntity.ok().body(BookOutput.buildFrom(updatedBook));
     }
 }

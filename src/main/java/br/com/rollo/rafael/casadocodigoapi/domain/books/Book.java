@@ -146,4 +146,16 @@ public class Book {
     public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
     }
+
+    public void updateBy(Book bookUpdate) {
+        this.setTitle(bookUpdate.getTitle());
+        this.setSubtitle(bookUpdate.getSubtitle());
+        this.setCoverImagePath(bookUpdate.getCoverImagePath());
+        this.setPrices(bookUpdate.getPrices());
+        this.setDescription(bookUpdate.getDescription());
+        this.setAuthor(bookUpdate.getAuthor());
+        this.setNumberOfPages(bookUpdate.getNumberOfPages());
+        this.setIsbn(bookUpdate.getIsbn());
+        this.setPublicationDate(bookUpdate.getPublicationDate());
+    }
 }

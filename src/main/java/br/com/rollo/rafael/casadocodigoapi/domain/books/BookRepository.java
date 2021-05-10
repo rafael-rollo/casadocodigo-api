@@ -12,4 +12,6 @@ public interface BookRepository extends Repository<Book, Integer> {
     List<Book> findAll();
 
     void deleteById(Integer id);
+
+    Book findById(Integer id);
 }
