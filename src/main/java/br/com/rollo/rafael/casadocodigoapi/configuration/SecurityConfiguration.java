@@ -69,8 +69,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     			new JWTAuthenticationFilter(tokenManager, userLoading);
     	
         http.authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/api/author/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/book/**").permitAll()
+        	.antMatchers(HttpMethod.GET, "/api/author/**").permitAll()
+        	.antMatchers("/api/author/**").hasRole("ADMIN")
+        	.antMatchers(HttpMethod.GET, "/api/book/**").permitAll()
+            .antMatchers("/api/book/**").hasRole("ADMIN")
             .antMatchers("/api/auth").permitAll()
             .anyRequest().authenticated()
          .and()
