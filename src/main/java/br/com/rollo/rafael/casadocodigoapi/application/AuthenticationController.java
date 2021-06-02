@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rollo.rafael.casadocodigoapi.application.input.SignInInput;
 import br.com.rollo.rafael.casadocodigoapi.application.output.AuthenticationTokenOutput;
-import br.com.rollo.rafael.casadocodigoapi.infrastructure.security.TokenGeneration;
+import br.com.rollo.rafael.casadocodigoapi.infrastructure.security.TokenManager;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -24,7 +24,7 @@ public class AuthenticationController {
 	private AuthenticationManager authManager;
 	
 	@Autowired
-	private TokenGeneration tokenGeneration;
+	private TokenManager tokenGeneration;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,7 +35,7 @@ public class AuthenticationController {
 			Authentication authentication = authManager
 					.authenticate(authenticationToken);
 			
-			String jwt = tokenGeneration.execute(authentication);	
+			String jwt = tokenGeneration.generateToken(authentication);	
 			AuthenticationTokenOutput tokenOutput = new AuthenticationTokenOutput("Bearer", jwt);
 			
 			return ResponseEntity.ok(tokenOutput);
