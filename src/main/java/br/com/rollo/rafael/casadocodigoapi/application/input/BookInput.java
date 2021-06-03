@@ -11,11 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
-
-import static java.time.format.DateTimeFormatter.*;
 
 public class BookInput {
 

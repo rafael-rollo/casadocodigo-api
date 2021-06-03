@@ -106,5 +106,8 @@ public class User implements UserDetails {
         return Objects.hash(email);
     }
 
+	public String getPrimaryRoleName() {
+		return this.authorities.get(0).getAuthority();
+	}
 
 }

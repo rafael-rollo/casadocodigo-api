@@ -2,7 +2,6 @@ package br.com.rollo.rafael.casadocodigoapi.application.input;
 
 import br.com.rollo.rafael.casadocodigoapi.domain.authors.Author;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 

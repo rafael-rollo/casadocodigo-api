@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rollo.rafael.casadocodigoapi.application.input.SignInInput;
-import br.com.rollo.rafael.casadocodigoapi.application.output.AuthenticationTokenOutput;
+import br.com.rollo.rafael.casadocodigoapi.application.output.UserAuthenticationOutput;
+import br.com.rollo.rafael.casadocodigoapi.domain.users.User;
 import br.com.rollo.rafael.casadocodigoapi.infrastructure.security.TokenManager;
 
 @RestController
@@ -28,7 +29,7 @@ public class AuthenticationController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AuthenticationTokenOutput> authenticate(@RequestBody SignInInput signInInfo) {
+	public ResponseEntity<UserAuthenticationOutput> authenticate(@RequestBody SignInInput signInInfo) {
 		UsernamePasswordAuthenticationToken authenticationToken = signInInfo.build();
 		
 		try {
@@ -36,7 +37,8 @@ public class AuthenticationController {
 					.authenticate(authenticationToken);
 			
 			String jwt = tokenGeneration.generateToken(authentication);	
-			AuthenticationTokenOutput tokenOutput = new AuthenticationTokenOutput("Bearer", jwt);
+			UserAuthenticationOutput tokenOutput = 
+					new UserAuthenticationOutput((User) authentication.getPrincipal(), jwt);
 			
 			return ResponseEntity.ok(tokenOutput);
 		
