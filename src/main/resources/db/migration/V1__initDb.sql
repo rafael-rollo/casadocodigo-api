@@ -133,6 +133,18 @@ insert into author_technologiesshe_writes_about (author_id, technologiesshe_writ
     values (2, 'Spring');
 insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
     values (2, 'BlockChain');
+insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
+    values (2, 'Play Framework');
+insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
+    values (2, 'Design de Código');
+insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
+    values (2, 'Escalabilidade e Performance');
+insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
+    values (2, 'DDD');
+insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
+    values (2, 'CDD');
+insert into author_technologiesshe_writes_about (author_id, technologiesshe_writes_about)
+    values (2, 'Testes de Software');
 
 insert into book (title, subtitle, cover_image_path, description, number_of_pages, isbn, publication_date, author_id)
     values ('Orientação a Objetos e SOLID para Ninjas', 'Projetando classes flexíveis', 'https://cdn.shopify.com/s/files/1/0155/7645/products/oo-solid-sumario-featured_large.png', 'Neste livro, Maurício Aniche discute como a implementação e o foco no projeto de classes é importante para criar um software de qualidade. Sempre mantendo a característica de escrever um livro com uma didática voltada para o mundo real, você vai entender como moldar e dominar as peças da Orientação a Objetos usando os princípios de SOLID e escrevendo um código mais elegante e fácil de manter. Saia do básico e vire um ninja da Orientação a Objetos aprendendo de forma prática e eficaz as boas práticas do assunto. Os exemplos ao longo do livro estão escritos em Java, porém são facilmente compreendidas por qualquer programador. As discussões fazem sentido para todas as linguagens OO.', 155, '978-85-5519-037-7', '2020-10-10', 2);
