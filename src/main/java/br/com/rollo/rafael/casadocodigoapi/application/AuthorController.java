@@ -6,6 +6,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import br.com.rollo.rafael.casadocodigoapi.application.output.BookOutput;
+import br.com.rollo.rafael.casadocodigoapi.domain.books.Book;
+import br.com.rollo.rafael.casadocodigoapi.domain.books.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +34,13 @@ public class AuthorController {
 
     private AuthorRepository authors;
     private AuthorUpdate authorUpdate;
+    private BookRepository books;
 
     @Autowired
-    public AuthorController(AuthorRepository authors, AuthorUpdate authorUpdate) {
+    public AuthorController(AuthorRepository authors, AuthorUpdate authorUpdate, BookRepository books) {
         this.authors = authors;
         this.authorUpdate = authorUpdate;
+        this.books = books;
     }
 
     @Transactional
@@ -74,5 +79,11 @@ public class AuthorController {
 
         Author updatedAuthor = authorUpdate.execute(authorId, author);
         return ResponseEntity.ok().body(AuthorOutput.buildFrom(updatedAuthor));
+    }
+
+    @GetMapping(value = "/{id}/books", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookOutput>> listBooksOfAuthor(@PathVariable("id") Integer authorId) {
+        List<Book> foundBooks = this.books.findByAuthorId(authorId);
+        return ResponseEntity.ok().body(BookOutput.listFrom(foundBooks));
     }
 }
