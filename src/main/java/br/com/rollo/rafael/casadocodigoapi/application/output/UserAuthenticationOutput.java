@@ -3,16 +3,28 @@ package br.com.rollo.rafael.casadocodigoapi.application.output;
 import br.com.rollo.rafael.casadocodigoapi.domain.users.User;
 
 public class UserAuthenticationOutput {
-	
+
+	private Long id;
+	private String email;
     private String name;
     private String role;
     private Authentication authentication;
     
     public UserAuthenticationOutput(User user, String token) {
+    	this.id = user.getId();
+    	this.email = user.getEmail();
         this.name = user.getName();
         this.role = user.getPrimaryRoleName();
         this.authentication = new Authentication("Bearer", token);
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
 
 	public String getName() {
 		return name;
