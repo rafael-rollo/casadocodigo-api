@@ -13,7 +13,7 @@ public class AuthorOutput {
     private String lastName;
     private String bio;
     private String profilePicturePath;
-    private List<String> technologiesSHeWritesAbout = new ArrayList<>();
+    private List<String> technologies = new ArrayList<>();
     private Long publishedBooks;
 
     private AuthorOutput(Author author) {
@@ -22,7 +22,7 @@ public class AuthorOutput {
         this.lastName = author.getLastName();
         this.bio = author.getBio();
         this.profilePicturePath = author.getProfilePicturePath();
-        this.technologiesSHeWritesAbout = author.getTechnologiesSHeWritesAbout();
+        this.technologies = author.getTechnologiesSHeWritesAbout();
         this.publishedBooks = author.getPublishedBooks().stream().count();
     }
 
@@ -46,8 +46,8 @@ public class AuthorOutput {
         return profilePicturePath;
     }
 
-    public List<String> getTechnologiesSHeWritesAbout() {
-        return technologiesSHeWritesAbout;
+    public List<String> getTechnologies() {
+        return technologies;
     }
 
     public Long getPublishedBooks() {
